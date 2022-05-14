@@ -1,0 +1,9 @@
+### <% if object.tags(:overload).size == 1 %><%= signature(object.tag(:overload), false) %><% elsif object.tags(:overload).size > 1 %><% object.tags(:overload).each do |overload| %><%= signature(overload, false) %><% end %><% else %><%= signature(object, false) %><% end %>
+
+<% if object.aliases.size > 0 %>
+**Also known as:** <%= object.aliases.map(&:name).join(", ") %>
+<% end%>
+
+<% if owner != object.namespace %>
+_Originally defined in <%= object.namespace.type %>_
+<% end %>

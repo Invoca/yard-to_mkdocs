@@ -1,0 +1,13 @@
+<% if object.has_tag?(:option) %>
+<% object.parameters.each do |param, default| %>
+<% tags = object.tags(:option).select {|x| x.name.to_s == param.to_s.sub(/^\*+|:$/, '') } %>
+<% next if tags.empty? %>
+
+Options Hash (`<%= param %>`):
+
+<% tags.each do |tag| %>
+* <%= tag.pair.name %> <%= format_types(tag.pair.types || ['Object']) %> <% if tag.pair.defaults %> - default: <%= tag.pair.defaults.map { |t| "`#{h t}`" }.join(", ") %><% end %> <% if tag.pair.text && tag.pair.text =~ /\S/ %> - <%= tag.pair.text %><% end %>
+
+<% end %>
+<% end %>
+<% end %>

@@ -1,0 +1,11 @@
+<% found_const = false %>
+<% inherited_constant_list do |superclass, consts| %>
+<% if constant_listing.size == 0 && !found_const %>
+## Constant Summary
+<% end %>
+<% found_const = true %>
+
+### Constants <%= superclass.type == :class ? 'inherited' : 'included' %>from <%= superclass %>
+
+<%= consts.map {|c| linkify c }.join(", ") %>
+<% end %>

@@ -1,0 +1,13 @@
+<% if object.has_tag?(:example) %>
+Examples:
+
+<% object.tags(:example).each do |tag| %>
+<% unless tag.name.empty? %>
+<%= tag.name %>
+
+<% end %>
+```ruby
+  <%= tag.text %>
+```
+<% end %>
+<% end %>

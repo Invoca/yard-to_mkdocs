@@ -1,0 +1,11 @@
+<% if object.tags(:overload).size == 1 %>
+<%= yieldall :object => object.tag(:overload) %>
+<% elsif object.has_tag?(:overload) && object.tags(:overload).any? {|o| !o.docstring.blank? } %>
+
+Overloads:
+
+<% object.tags(:overload).each do |overload| %>
+<% next if overload.docstring.blank? %>
+* <%= signature(overload, false, false) %> <%= yieldall :object => overload %>
+<% end %>
+<% end %>

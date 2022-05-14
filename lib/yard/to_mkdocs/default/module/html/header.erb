@@ -1,0 +1,1 @@
+# <%= format_object_title(object) %><% if object.has_tag?(:abstract) %> Abstract<% end %><% if object.has_tag?(:deprecated) %> Deprecated<% end %><% if object.has_tag?(:api) && object.tag(:api).text == 'private' %> Private<% end %>

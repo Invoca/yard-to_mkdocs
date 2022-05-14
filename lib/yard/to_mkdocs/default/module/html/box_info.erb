@@ -1,0 +1,14 @@
+<% if CodeObjects::ClassObject === object && object.superclass %>
+**Inherits:** <%= linkify object.superclass %>
+<% end %>
+<% [[:class, "Extended by"], [:instance, "Includes"]].each do |scope, name| %>
+<% if (mix = run_verifier(object.mixins(scope))).size > 0 %>
+**<%= name %>:** <%= mix.sort_by {|o| o.path }.map {|o| linkify(o) }.join(", ") %>
+<% end %>
+<% end %>
+<% if (mixed_into = mixed_into(object)).size > 0 %>
+**Included in:** <%= mixed_into.sort_by {|o| o.path }.map {|o| linkify(o) }.join(", ") %>
+<% end %>
+<% unless object.root? %>
+**Defined in:** <%= erb(:defines) %>
+<% end %>

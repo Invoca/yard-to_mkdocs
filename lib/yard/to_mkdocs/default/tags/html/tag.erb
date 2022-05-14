@@ -1,0 +1,6 @@
+<%= (defined?(@label) && @label) ? @label : YARD::Tags::Library.labels[@name] %>:
+
+<% object.tags(@name).each do |tag| %>
+* <% unless @no_names %><%= h tag.name %><% end %> <% unless @no_types %><%= format_types(tag.types) %><% end %> <% if @name == :param && (o=object.parameters.find {|a| [tag.name.to_s, tag.name.to_s + ":"].include?(a[0]) }) && o[1] %>_(defaults to: `<%= h o[1] %>`)_<% end %> <% if tag.text && !tag.text.empty? %><% unless (@no_types || tag.types.nil? || tag.types.empty?) && @no_names %>&mdash;<% end %><%= tag.text %><% end %>
+
+<% end %>

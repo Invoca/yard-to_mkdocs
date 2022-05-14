@@ -1,0 +1,16 @@
+<% found_method = false %>
+<% inherited_attr_list do |superclass, attribs| %>
+<% if attr_listing.size == 0 && !found_method %>## Instance Attribute Summary<% end %>
+<% found_method = true %>
+### Attributes <%= superclass.type == :class ? 'inherited' : 'included' %> from <%= superclass %>
+
+<%=
+attribs.map do |method|
+  name = method.name(true).gsub(/=$/, '')
+  if superclass.type == :module && object.instance_mixins.include?(superclass)
+    name = "##{name}" unless name =~ /^#/
+  end
+  linkify(method, name)
+end.join(", ")
+%>
+<% end %>

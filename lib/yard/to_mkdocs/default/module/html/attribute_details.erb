@@ -1,0 +1,7 @@
+<% scopes(attr_listing) do |list, scope| %>
+## <%= scope.to_s.capitalize %> Attribute Details
+
+<% list.each_with_index do |meth, i| %>
+<%= yieldall :object => meth, :owner => object, :index => i %>
+<% end %>
+<% end %>

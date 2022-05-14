@@ -1,0 +1,7 @@
+## Constructor Details
+
+<% if @ctor.namespace != object %>
+This class inherits a constructor from <%= linkify @ctor, @ctor.namespace.path %>
+<% else %>
+<%= yieldall :object => @ctor, :index => 0 %>
+<% end %>

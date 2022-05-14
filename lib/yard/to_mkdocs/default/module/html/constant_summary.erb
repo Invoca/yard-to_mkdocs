@@ -1,0 +1,13 @@
+<% if constant_listing.size > 0 %>
+<% groups(constant_listing, "Constant") do |list, name| %>
+## <%= name %>
+
+<% list.each do |cnst| %>
+<%= cnst.has_tag?(:deprecated) ? '~' : '' %><%= cnst.name %> = <%= yieldall :item => cnst %><%= cnst.has_tag?(:deprecated) ? '~' : '' %>
+
+```ruby
+  <%= cnst.value %>
+```
+<% end %>
+<% end %>
+<% end %>
