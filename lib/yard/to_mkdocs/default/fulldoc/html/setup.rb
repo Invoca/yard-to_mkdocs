@@ -28,10 +28,11 @@ def init
   end
 
   mkdocs_file_path = File.expand_path('../../mkdocs.yml', options.serializer.basepath)
+  root_path = options.serializer.basepath.split('/')[1..-1].join('/')
   if File.exists?(mkdocs_file_path)
     mkdocs_yaml = YAML.load_file(mkdocs_file_path)
     mkdocs_nav = mkdocs_yaml['nav'].reject { |item| item["YARD Docs"] }
-    mkdocs_yaml['nav'] = mkdocs_nav + [{ options[:title] => mkdocs_nav_tree(objects.first) }]
+    mkdocs_yaml['nav'] = mkdocs_nav + [{ options[:title] => mkdocs_nav_tree(objects.first, root_path) }]
     File.open(mkdocs_file_path, 'w') { |f| f.write(mkdocs_yaml.to_yaml) }
   end
 end

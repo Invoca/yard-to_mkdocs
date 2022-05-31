@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yard-to_mkdocs (0.1.0)
+    yard-to_mkdocs (0.1.1)
       yard
 
 GEM
