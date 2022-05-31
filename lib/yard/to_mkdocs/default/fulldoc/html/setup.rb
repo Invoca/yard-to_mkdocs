@@ -5,7 +5,6 @@ require 'yaml'
 include Helpers::ModuleHelper
 
 def init
-  options.serializer.basepath  = 'docs/yard_docs'
   options.serializer.extension = 'md'
 
   options.objects = objects = run_verifier(options.objects)
@@ -32,7 +31,7 @@ def init
   if File.exists?(mkdocs_file_path)
     mkdocs_yaml = YAML.load_file(mkdocs_file_path)
     mkdocs_nav = mkdocs_yaml['nav'].reject { |item| item["YARD Docs"] }
-    mkdocs_yaml['nav'] = mkdocs_nav + [{ "YARD Docs" => mkdocs_nav_tree(objects.first) }]
+    mkdocs_yaml['nav'] = mkdocs_nav + [{ options[:title] => mkdocs_nav_tree(objects.first) }]
     File.open(mkdocs_file_path, 'w') { |f| f.write(mkdocs_yaml.to_yaml) }
   end
 end
